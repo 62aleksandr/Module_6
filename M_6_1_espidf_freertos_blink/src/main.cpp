@@ -34,10 +34,10 @@ void led16_task(void *pvParameters)
 	for (;;)
 	{
 		gpio_set_level(BLINK_16, 1);
-		vTaskDelay(pdMS_TO_TICKS(300));
+		vTaskDelay(pdMS_TO_TICKS(500));
 
 		gpio_set_level(BLINK_16, 0);
-		vTaskDelay(pdMS_TO_TICKS(300));
+		vTaskDelay(pdMS_TO_TICKS(500));
 	}
 }
 
@@ -47,10 +47,10 @@ void led17_task(void *pvParameters)
 	for (;;)
 	{
 		gpio_set_level(BLINK_17, 1);
-		vTaskDelay(pdMS_TO_TICKS(200));
+		vTaskDelay(pdMS_TO_TICKS(500));
 
 		gpio_set_level(BLINK_17, 0);
-		vTaskDelay(pdMS_TO_TICKS(200));
+		vTaskDelay(pdMS_TO_TICKS(500));
 	}
 }
 
@@ -77,6 +77,7 @@ extern "C" void app_main(void)
 		5,					// пріоритет задачі
 		&led15_task_handle, // дескриптор задачі
 		xCoreID);			// ядро процесора
+
 	xTaskCreatePinnedToCore(
 		led16_task,
 		"LED16_Task",
@@ -85,6 +86,7 @@ extern "C" void app_main(void)
 		5,
 		&led16_task_handle,
 		xCoreID);
+
 	xTaskCreatePinnedToCore(
 		led17_task,
 		"LED17_Task",

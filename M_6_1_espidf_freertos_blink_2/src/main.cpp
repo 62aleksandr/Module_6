@@ -1,4 +1,3 @@
-
 #include "led_tasks.h"
 
 extern "C" void app_main(void)

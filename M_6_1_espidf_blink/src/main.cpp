@@ -27,24 +27,20 @@ extern "C" void app_main(void)
 	while (1)
 	{
 		// LED_15 ON
-		// printf("LED_15 ON\n");
 		gpio_set_level(BLINK_15, 1);
 		vTaskDelay(500 / portTICK_PERIOD_MS); // Delay 500 ms
 
 		// LED_15 OFF LED_16 ON
-		// printf("LED_15 OFF, LED_16 ON\n");
 		gpio_set_level(BLINK_15, 0);
 		gpio_set_level(BLINK_16, 1);
 		vTaskDelay(300 / portTICK_PERIOD_MS); // Delay 300 ms
 
 		// LED_16 OFF LED_17 ON
-		// printf("LED_16 OFF, LED_17 ON\n");
 		gpio_set_level(BLINK_16, 0);
 		gpio_set_level(BLINK_17, 1);
 		vTaskDelay(300 / portTICK_PERIOD_MS); // Delay 300 ms
 
-		// LED_15 ON
-		// printf("LED_17 ON\n");
+		// LED_17 OFF
 		gpio_set_level(BLINK_17, 0);
 		vTaskDelay(100 / portTICK_PERIOD_MS); // Delay 100 ms
 	}
