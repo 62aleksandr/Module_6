@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
- ******************************************************************************
- * @file           : main.c
- * @brief          : Main program body
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2026 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2026 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -44,30 +44,30 @@
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
-    .name = "defaultTask",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+  .name = "defaultTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for myLedTask01 */
-osThreadId_t myLedTask01Handle;
-const osThreadAttr_t myLedTask01_attributes = {
-    .name = "myLedTask01",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+/* Definitions for myTask01 */
+osThreadId_t myTask01Handle;
+const osThreadAttr_t myTask01_attributes = {
+  .name = "myTask01",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for myLedTask02 */
-osThreadId_t myLedTask02Handle;
-const osThreadAttr_t myLedTask02_attributes = {
-    .name = "myLedTask02",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+/* Definitions for myTask02 */
+osThreadId_t myTask02Handle;
+const osThreadAttr_t myTask02_attributes = {
+  .name = "myTask02",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for myLedTask03 */
-osThreadId_t myLedTask03Handle;
-const osThreadAttr_t myLedTask03_attributes = {
-    .name = "myLedTask03",
-    .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+/* Definitions for myTask03 */
+osThreadId_t myTask03Handle;
+const osThreadAttr_t myTask03_attributes = {
+  .name = "myTask03",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 /* USER CODE BEGIN PV */
 
@@ -91,9 +91,9 @@ void StartLedTask03(void *argument);
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
@@ -146,14 +146,14 @@ int main(void)
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* creation of myLedTask01 */
-  myLedTask01Handle = osThreadNew(StartLedTask01, NULL, &myLedTask01_attributes);
+  /* creation of myTask01 */
+  myTask01Handle = osThreadNew(StartLedTask01, NULL, &myTask01_attributes);
 
-  /* creation of myLedTask02 */
-  myLedTask02Handle = osThreadNew(StartLedTask02, NULL, &myLedTask02_attributes);
+  /* creation of myTask02 */
+  myTask02Handle = osThreadNew(StartLedTask02, NULL, &myTask02_attributes);
 
-  /* creation of myLedTask03 */
-  myLedTask03Handle = osThreadNew(StartLedTask03, NULL, &myLedTask03_attributes);
+  /* creation of myTask03 */
+  myTask03Handle = osThreadNew(StartLedTask03, NULL, &myTask03_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -180,22 +180,22 @@ int main(void)
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-   */
+  */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-   * in the RCC_OscInitTypeDef structure.
-   */
+  * in the RCC_OscInitTypeDef structure.
+  */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -211,8 +211,9 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
@@ -225,10 +226,10 @@ void SystemClock_Config(void)
 }
 
 /**
- * @brief GPIO Initialization Function
- * @param None
- * @retval None
- */
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -242,10 +243,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_1_Pin | LED_2_Pin | LED_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_1_Pin|LED_2_Pin|LED_3_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_1_Pin LED_2_Pin LED_3_Pin */
-  GPIO_InitStruct.Pin = LED_1_Pin | LED_2_Pin | LED_3_Pin;
+  /*Configure GPIO pin : LED_1_Pin */
+  GPIO_InitStruct.Pin = LED_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED_1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED_2_Pin LED_3_Pin */
+  GPIO_InitStruct.Pin = LED_2_Pin|LED_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -262,16 +270,16 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
- * @brief  Function implementing the defaultTask thread.
- * @param  argument: Not used
- * @retval None
- */
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-  for (;;)
+  for(;;)
   {
     osDelay(1);
   }
@@ -280,75 +288,66 @@ void StartDefaultTask(void *argument)
 
 /* USER CODE BEGIN Header_StartLedTask01 */
 /**
- * @brief Function implementing the myLedTask01 thread.
- * @param argument: Not used
- * @retval None
- */
+* @brief Function implementing the myTask01 thread.
+* @param argument: Not used
+* @retval None
+*/
 /* USER CODE END Header_StartLedTask01 */
 void StartLedTask01(void *argument)
 {
   /* USER CODE BEGIN StartLedTask01 */
   /* Infinite loop */
-  for (;;)
+  for(;;)
   {
-    HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_SET);
-    osDelay(500);
-    HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_RESET);
-    osDelay(500);
+    osDelay(1);
   }
   /* USER CODE END StartLedTask01 */
 }
 
 /* USER CODE BEGIN Header_StartLedTask02 */
 /**
- * @brief Function implementing the myLedTask02 thread.
- * @param argument: Not used
- * @retval None
- */
+* @brief Function implementing the myTask02 thread.
+* @param argument: Not used
+* @retval None
+*/
 /* USER CODE END Header_StartLedTask02 */
 void StartLedTask02(void *argument)
 {
   /* USER CODE BEGIN StartLedTask02 */
   /* Infinite loop */
-  for (;;)
+  for(;;)
   {
-    HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_SET);
-    osDelay(500);
-    HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_RESET);
-    osDelay(500);
+    osDelay(1);
   }
   /* USER CODE END StartLedTask02 */
 }
 
 /* USER CODE BEGIN Header_StartLedTask03 */
 /**
- * @brief Function implementing the myLedTask03 thread.
- * @param argument: Not used
- * @retval None
- */
+* @brief Function implementing the myTask03 thread.
+* @param argument: Not used
+* @retval None
+*/
 /* USER CODE END Header_StartLedTask03 */
 void StartLedTask03(void *argument)
 {
   /* USER CODE BEGIN StartLedTask03 */
   /* Infinite loop */
-  for (;;)
+  for(;;)
   {
-    HAL_GPIO_WritePin(GPIOA, LED_3_Pin, GPIO_PIN_SET);
-    osDelay(500);
-    HAL_GPIO_WritePin(GPIOA, LED_3_Pin, GPIO_PIN_RESET);
-    osDelay(500);
+    osDelay(1);
   }
   /* USER CODE END StartLedTask03 */
 }
 
 /**
- * @brief  Period elapsed callback in non blocking mode
- * @note   This function is called  when TIM2 interrupt took place, inside
- * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
- * a global variable "uwTick" used as application time base.
- * @param  htim : TIM handle
- * @retval None
- */
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM2 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
@@ -364,9 +363,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -379,12 +378,12 @@ void Error_Handler(void)
 }
 #ifdef USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
