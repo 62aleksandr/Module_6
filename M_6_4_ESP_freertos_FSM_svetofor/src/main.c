@@ -15,25 +15,8 @@
 
 static const char *TAG = "SVETOFOR";
 
-QueueHandle_t eventQueue;
-
-// // Стан світлофора
-// typedef enum
-// {
-// 	STATE_RED = 0,
-// 	STATE_YELLOW,
-// 	STATE_GREEN
-
-// } TrafficState_t;
-
-// // Подія
-// typedef enum
-// {
-// 	EVENT_15S = 0,
-// 	EVENT_20S,
-// 	EVENT_40S
-
-// } TimerEvent_t;
+static QueueHandle_t eventQueue;
+static esp_timer_handle_t timer;
 
 // Таймер
 void timer_callback(void *arg)
@@ -149,7 +132,6 @@ void app_main(void)
 			// .dispatch_method = ESP_TIMER_TASK,
 			.name = "fsm_timer"};
 
-	esp_timer_handle_t timer;
 	esp_timer_create(&timer_args, &timer);
 
 	// Timer every 1 second
