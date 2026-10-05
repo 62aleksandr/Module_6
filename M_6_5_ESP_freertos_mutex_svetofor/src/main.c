@@ -43,8 +43,7 @@ static void IRAM_ATTR button_isr_handler(void *arg)
 {
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
-	xSemaphoreGiveFromISR(buttonSemaphore,
-						  &xHigherPriorityTaskWoken);
+	xSemaphoreGiveFromISR(buttonSemaphore, &xHigherPriorityTaskWoken);
 
 	if (xHigherPriorityTaskWoken)
 	{
@@ -58,7 +57,6 @@ void timer_callback(void *arg)
 
 	if (xSemaphoreTake(counterMutex, pdMS_TO_TICKS(100)) == pdTRUE)
 	{
-
 		counter++;
 		TimerEvent_t event;
 

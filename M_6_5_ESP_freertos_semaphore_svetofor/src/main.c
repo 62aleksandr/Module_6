@@ -122,7 +122,7 @@ void fsm_task(void *pvParameters)
 				if (event == EVENT_40S)
 				{
 					state = STATE_RED;
-					ESP_LOGI(TAG, "40s -> STATE: RED");
+					ESP_LOGI(TAG, "40/0s -> STATE: RED");
 					set_leds(1, 0, 0);
 				}
 				break;
