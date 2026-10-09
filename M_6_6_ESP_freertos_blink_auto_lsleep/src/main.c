@@ -20,7 +20,7 @@ TaskHandle_t led10_task_handle = NULL;
 TaskHandle_t led11_task_handle = NULL;
 TaskHandle_t led12_task_handle = NULL;
 
-// Час ON/OFF — 40 секунд
+// Час ON/OFF — 20 секунд
 #define SLEEP_TIME_MS (20 * 1000)
 
 static const char *TAG = "MAIN";
@@ -33,10 +33,6 @@ void led10_task(void *pvParameters)
 		gpio_set_level(BLINK_10, 1);
 		ESP_LOGI(TAG, "LED 10 ON");
 		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
-
-		gpio_set_level(BLINK_10, 0);
-		ESP_LOGI(TAG, "LED 10 OFF");
-		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
 	}
 }
 
@@ -48,10 +44,6 @@ void led11_task(void *pvParameters)
 		gpio_set_level(BLINK_11, 1);
 		ESP_LOGI(TAG, "LED 11 ON");
 		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
-
-		gpio_set_level(BLINK_11, 0);
-		ESP_LOGI(TAG, "LED 11 OFF");
-		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
 	}
 }
 
@@ -62,10 +54,6 @@ void led12_task(void *pvParameters)
 	{
 		gpio_set_level(BLINK_12, 1);
 		ESP_LOGI(TAG, "LED 12 ON");
-		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
-
-		gpio_set_level(BLINK_12, 0);
-		ESP_LOGI(TAG, "LED 12 OFF");
 		vTaskDelay(pdMS_TO_TICKS(SLEEP_TIME_MS));
 	}
 }
